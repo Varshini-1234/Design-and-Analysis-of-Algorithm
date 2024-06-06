@@ -1,0 +1,15 @@
+def MaxNonEmpSubSeq(a, n):
+    sum = 0
+    maxm = max(a)
+ 
+    if (maxm <= 0):
+        return maxm
+    for i in range(n):
+        if (a[i] > 0):
+            sum += a[i]          
+    return sum
+if __name__ == '__main__':   
+    arr = [ -2, 11, -4, 2, -3, -10 ]
+    N = len(arr)
+    print(MaxNonEmpSubSeq(arr, N))
+ 
