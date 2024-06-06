@@ -1,0 +1,42 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def constructMaximumBinaryTree(self, nums):
+        def construct(l, r):
+            if l > r:
+                return None
+            elif l == r:
+                return TreeNode(nums[l])
+            maximum = -float('inf')
+            for i in range(l, r + 1):
+                if maximum < nums[i]:
+                    maximum = nums[i]
+                    max_index = i
+            left = construct(l, max_index - 1)
+            right = construct(max_index + 1, r)
+            root = TreeNode(maximum)
+            root.left = left
+            root.right = right
+            return root
+        return construct(0, len(nums) - 1)
+
+# Helper function to print the tree in pre-order traversal
+def preOrder(node):
+    if not node:
+        return
+    print(node.val, end=" ")
+    preOrder(node.left)
+    preOrder(node.right)
+
+# Example usage
+solution = Solution()
+nums = [3, 2, 1, 6, 0, 5]
+root = solution.constructMaximumBinaryTree(nums)
+
+# Print the constructed Maximum Binary Tree
+print("Pre-order traversal of the constructed Maximum Binary Tree:")
+preOrder(root)
