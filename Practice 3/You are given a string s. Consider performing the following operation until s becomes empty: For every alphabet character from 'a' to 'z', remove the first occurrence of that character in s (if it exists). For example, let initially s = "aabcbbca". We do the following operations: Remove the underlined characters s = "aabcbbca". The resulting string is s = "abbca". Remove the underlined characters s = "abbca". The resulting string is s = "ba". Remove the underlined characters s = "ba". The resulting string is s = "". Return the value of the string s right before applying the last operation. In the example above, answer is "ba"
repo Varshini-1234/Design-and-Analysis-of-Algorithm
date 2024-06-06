@@ -1,0 +1,29 @@
+from collections import Counter
+
+class Solution:
+    def lastNonEmptyString(self, s: str) -> str:
+        # Create a counter object to count occurrences of each character in the string.
+        char_count = Counter(s)
+      
+        # Find the maximum count of any character in the string.
+        max_count = char_count.most_common(1)[0][1]
+      
+        # Create a dictionary to record the last known index of each character.
+        last_index = {char: idx for idx, char in enumerate(s)}
+      
+        # Build the result string comprising characters with the maximum count and
+        # only include the character if it's the last occurrence in the string.
+        result = "".join(
+            char for idx, char in enumerate(s)
+            if char_count[char] == max_count and last_index[char] == idx
+        )
+      
+        return result
+
+# Test case
+solution = Solution()
+
+# Test case with input "abbccc"
+test_string = "abbccc"
+output = solution.lastNonEmptyString(test_string)
+print(f"Output for '{test_string}': '{output}'")
