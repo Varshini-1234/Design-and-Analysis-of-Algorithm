@@ -1,0 +1,38 @@
+def getGoodString(s):
+	n = len(s)
+	freq = [0] * 26
+
+	for i in range(n - 25):
+		found = True
+		freq = [0] * 26
+
+		for j in range(i, i + 26):
+			if s[j] != '?':
+				freq[ord(s[j]) - ord('a')] += 1
+				if freq[ord(s[j]) - ord('a')] > 1:
+					found = False
+					break
+
+		if found:
+			idx = 0
+			for j in range(i, i + 26):
+				if s[j] == '?':
+					while freq[idx]:
+						idx += 1
+					s = s[:j] + chr(idx + ord('a')) + s[j + 1:]
+					freq[idx] = 1
+
+			for j in range(n):
+				if s[j] == '?':
+					s = s[:j] + 'a' + s[j + 1:]
+			return s
+
+	return "-1"
+
+# Driver code
+def main():
+	s = "abcdefghijkl?nopqrstuvwxy?"
+	print(getGoodString(s)) # Output: "abcdefghijklmnopqrstuvwxyz"
+
+if __name__ == "__main__":
+	main()
