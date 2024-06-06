@@ -1,0 +1,35 @@
+NO_OF_CHARS = 256
+
+# Function to check whether two strings are permutations of each other
+def arePermutation(str1, str2):
+
+    # If both strings are of different lengths, they cannot be permutations
+    if len(str1) != len(str2):
+        return False
+
+    # Create count arrays and initialize all values as 0
+    count1 = [0] * NO_OF_CHARS
+    count2 = [0] * NO_OF_CHARS
+
+    # Increment count in the corresponding count array for each character
+    for i in str1:
+        count1[ord(i)] += 1
+
+    for i in str2:
+        count2[ord(i)] += 1
+
+    # Compare count arrays
+    for i in range(NO_OF_CHARS):
+        if count1[i] != count2[i]:
+            return False
+
+    return True
+
+# Driver program to test the above function
+str1 = "geeksforgeeks"
+str2 = "forgeeksgeeks"
+
+if arePermutation(str1, str2):
+    print("Yes")
+else:
+    print("No")
